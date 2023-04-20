@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
-    "target": "es2020",
+    "target": "ES2022",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": true,
+    "strict": false,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -13,12 +13,29 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true,
     "baseUrl": ".",
+
     "paths": {
-      "@/*": ["./*"]
-    }
+      "@/components/*": ["components/*"],
+      "@/hooks/*": ["hooks/*"],
+      "@/mocks/*": ["mocks/*"],
+      "@/pages/*": ["pages/*"],
+      "@/lib/*": ["lib/*"],
+      "@/styles/*": ["styles/*"],
+      "@/types/*": ["types/*"],
+      "@/assets/*": ["assets/*"],
+      "@/contexts/*": ["contexts/*"],
+      "@/utils/*": ["utils/*"],
+      "@/constants/*": ["constants/*"],
+      "@/providers/*": ["providers/*"],
+      "@/layouts/*": ["layouts/*"],
+      "@/motions/*": ["motions/*"],
+      "@/features/*": ["features/*"],
+      "@/firebase/*": ["firebase/*"]
+    },
+    "incremental": true
   },
-  "include": ["**/*.d.ts", "**/*.ts", "**/*.tsx"],
+
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "next.config.js"],
   "exclude": ["node_modules"]
 }

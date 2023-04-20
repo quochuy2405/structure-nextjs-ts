@@ -1,16 +1,10 @@
-import { ThemeProvider } from 'next-themes'
-import { getMainLayout } from '@/layouts'
 import type { AppProps } from '@/types/next'
-import '@/styles/global.scss'
+import '@/styles/global.css'
 
 function App({ Component, pageProps }: AppProps) {
-  const getLayout = Component.getLayout || getMainLayout
+  const getLayout = Component.getLayout
 
-  return (
-    <ThemeProvider attribute="class" storageKey="theme" value={{ dark: 'dark' }} enableSystem>
-      {getLayout(<Component {...pageProps} />)}
-    </ThemeProvider>
-  )
+  return <Component {...pageProps} />
 }
 
 export default App

@@ -13,6 +13,8 @@ const Home: NextPage = () => {
   }
 
   const handleLogin = async () => {
+    // gọi đúng name nha k thì nó ra 1 trang login mặc định cho mà dùng
+    // name = credentials đã config ở trong api/auth
     signIn('credentials', { username: 'jsmith', password: '1234' })
   }
 

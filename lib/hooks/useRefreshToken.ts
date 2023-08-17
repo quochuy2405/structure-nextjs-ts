@@ -6,9 +6,9 @@ const useRefreshToken = () => {
 
   const refreshToken = () => {
     const res = axios.post('/auth/refresh', {
-      refresh: session?.user.refreshToken
+      refresh: session?.refreshToken
     })
-    if (res) session.user.accessToken = session.user.accessToken
+    if (res) session.accessToken = session.accessToken
   }
   return refreshToken
 }

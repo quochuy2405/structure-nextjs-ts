@@ -7,8 +7,8 @@ export const authOptions: AuthOptions = {
   },
   providers: [
     CredentialsProvider({
-      // The name to display on the sign in form (e.g. "Sign in with...")
-      name: 'Credentials',
+      // đây là name để dùng cho các hàm vì có thể muliple provide nên mình có id để xác định đc provider nào
+      name: 'credentials',
 
       credentials: {
         username: { label: 'username', type: 'text' },
@@ -18,19 +18,19 @@ export const authOptions: AuthOptions = {
         // Add logic here to look up the user from the credentials supplied
 
         // const { username, password } = credentials
-
+        //  call api ở đây mà tui mặc định cái data trả về là như bên dưới
         // const res = await axios.post('/auth/user', { username, password })
         const res: any = {
           data: {
             user: {
               id: '2',
               name: 'Huy',
-              email: 'huy@gmail.com',
-              accessToken:
-                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Ikh1eSBCdWkiLCJpYXQiOjE1MTYyMzkwMjJ9.0SVyu51YwgsY-qzequoTwvZrl0jEu6CYwQO3WFW5TQ0',
-              refreshToken:
-                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Ikh1eSBCdWkiLCJpYXQiOjE1MTYyMzkwMjJ9.0SVyu51YwgsY-qzequoTwvZrl0jEu6CYwQO3WFW5TQ0'
-            }
+              email: 'huy@gmail.com'
+            },
+            accessToken:
+              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Ikh1eSBCdWkiLCJpYXQiOjE1MTYyMzkwMjJ9.0SVyu51YwgsY-qzequoTwvZrl0jEu6CYwQO3WFW5TQ0',
+            refreshToken:
+              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Ikh1eSBCdWkiLCJpYXQiOjE1MTYyMzkwMjJ9.0SVyu51YwgsY-qzequoTwvZrl0jEu6CYwQO3WFW5TQ0'
           }
         }
 
@@ -55,12 +55,25 @@ export const authOptions: AuthOptions = {
   },
   callbacks: {
     async session({ session, token }) {
+      // cái này mình phải set up \
+      // session: {
+      //   strategy: 'jwt'
+      // },
+      // ở trên đầu thì cái hàm async jwt({ token, user }) mới chạy nha
+      // mặc định hàm jwt thì trả vè token muốn nhét gì vào thì xem đọa code ở dưới
       session.user = token.user
+      session.accessToken = token.accessToken
       return session
     },
     async jwt({ token, user }) {
+      // token vs user được overide type bên trong types/nextauth nhé
+
+      // nhận vào 2 đối số là token mặc định với user là data trả về ở trên  async authorize(credentials, req)
+      // rồi làm gì làm với nó chủ yếu dùng session để sài
+
       if (user) {
         token.user = user
+        token.accessToken = user.accessToken
       }
       return Promise.resolve(token)
     }

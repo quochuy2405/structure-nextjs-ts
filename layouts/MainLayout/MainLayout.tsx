@@ -1,5 +1,6 @@
 import * as React from 'react'
-import { Metadata } from '@/components'
+import Metadata from '../Metadata/Metadata'
+import { Header } from '@/components/organisms'
 
 interface MainLayoutProps {
   children: React.ReactNode
@@ -14,7 +15,12 @@ function MainLayout({ children }: MainLayoutProps) {
   )
 }
 
-const getMainLayout = (page: JSX.Element) => <MainLayout>{page}</MainLayout>
+const SecondLayout = ({ children }) => (
+  <MainLayout>
+    <Header />
+    {children}
+  </MainLayout>
+)
 
 export default MainLayout
-export { getMainLayout }
+export { SecondLayout }

@@ -1,1 +1,1 @@
-export { default as Metadata } from './Metadata'
+export { default as Metadata } from '../layouts/Metadata'
